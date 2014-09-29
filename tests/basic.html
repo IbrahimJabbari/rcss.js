@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>rcss.js</title>
+	
+	<link rel="stylesheet" href="css/normalize.css" />
+	
+	<style>
+		body {
+			color: #fff;
+			font-family: sans-serif;
+			-webkit-font-smoothing: antialiased;
+		}
+		
+		.container { padding: 2em; }
+		
+		pre {
+			background-color: rgba(0, 0, 0, 0.15);
+			padding: 1em;
+			white-space: pre-wrap;
+		}
+		
+		a { color: #fff; }
+	</style>
+</head>
+<body>
+
+<div class="container">
+	<h1>Resize the browser for magic!</h1>
+	<p>Magic powered by <a href="https://github.com/timseverien/rcss.js">rcss.js</a></p>
+</div>
+
+<script src="../build/rcss.js"></script>
+<script>
+	var style = new RCSS.Style();
+	style.inject();
+	
+	style.add('body', { 'background-color': '#913ca6' });
+	
+	style.createQuery('(min-width: 36em)')
+		.add('body', { 'background-color': '#a63c91' });
+	
+	style.createQuery('(min-width: 48em)')
+		.add('body', { 'background-color': '#a63c66' });
+	
+	style.createQuery('(min-width: 60em)')
+		.add('body', { 'background-color': '#a73d3d' });
+</script>
+
+</body>
+</html>
