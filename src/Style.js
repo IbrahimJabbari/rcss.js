@@ -14,6 +14,14 @@ RCSS.Style = function(media) {
 RCSS.Style.prototype = Object.create(RCSS.BlockContainer.prototype);
 
 /**
+ * Clear all styles
+ */
+RCSS.Style.prototype.clear = function() {
+	this.blocks.length = 0;
+};
+
+
+/**
  * Injects the style element to DOM
  */
 RCSS.Style.prototype.inject = function() {
