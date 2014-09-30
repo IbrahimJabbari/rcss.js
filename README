@@ -2,7 +2,7 @@
 
 Sometimes you want to apply styles with JavaScript. Sometimes you need them to be responsive.
 
-At this point you’ll realise JavaScript isn’t much of a help at this point.
+At this point you’ll realise JavaScript won’t be much of a help.
 
 **rcss.js** is a little library that does exactly that; it generates responsive stylesheets at run-time.
 
@@ -43,7 +43,7 @@ style.createQuery('(min-width: 36rem)')
 	.add('.my-selector', {
     	display: 'block'
 	})
-    
+
     .add('.another-selector', {
     	width: (window.innerWidth / 2) + 'px'
     });
