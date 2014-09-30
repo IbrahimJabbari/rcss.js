@@ -4,7 +4,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no" />
 	
-	<title>rcss.js &ndash; Basic example</title>
+	<title>rcss.js &ndash; Dynamic example</title>
 	
 	<link rel="stylesheet" href="css/normalize.css" />
 	
@@ -38,16 +38,24 @@
 	var style = new RCSS.Style();
 	style.inject();
 	
-	style.add('body', { 'background-color': '#913ca6' });
+	// Variable for dynamic styles
+	var dynamic_style = {};
+	style.add('body', dynamic_style);
 	
-	style.createQuery('(min-width: 36em)')
-		.add('body', { 'background-color': '#a63c91' });
+	var updateColor = function() {
+		// Generate hue
+		var h = Math.floor((window.innerWidth / 4) % 360);
+		
+		// Set new style
+		dynamic_style['background-color'] = 'hsl(' + h + ', 40%, 40%)';
+		
+		// Update style
+		style.inject();
+	};
 	
-	style.createQuery('(min-width: 48em)')
-		.add('body', { 'background-color': '#a63c66' });
-	
-	style.createQuery('(min-width: 60em)')
-		.add('body', { 'background-color': '#a73d3d' });
+	// Generate new color every resize
+	window.onresize = updateColor;
+	updateColor();
 </script>
 
 </body>
