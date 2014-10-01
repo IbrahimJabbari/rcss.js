@@ -21,7 +21,7 @@ for(i = 0; i < list_items.length; i++) {
 
 This script would run fine — until you decide to change your device’s orientation.
 
-![Problem](http://i.imgur.com/vEPKCuj.gif)
+![Problem](http://i.imgur.com/nuViAEe.gif)
 
 **rcss.js** is a little library that generates responsive stylesheets at run-time, saving you a headache.
 
