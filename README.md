@@ -1,10 +1,47 @@
-# rcss.js
+rcss.js
+====
 
-Sometimes you want to apply styles with JavaScript. Sometimes you need them to be responsive.
+Sometimes you want to apply styles with JavaScript. This can conflict with your responsive styles.
 
-At this point you’ll realise JavaScript won’t be much of a help.
+For example:
 
-**rcss.js** is a little library that does exactly that; it generates responsive stylesheets at run-time.
+```JavaScript
+var list_items = document.querySelectorAll('.list__item');
+var height = 0;
+var i;
+
+for(i = 0; i < list_items.length; i++) {
+	height = Math.max(list_items[i].clientHeight, height);
+}
+
+for(i = 0; i < list_items.length; i++) {
+	list_items[i].style.height = height + 'px';
+}
+```
+
+This script would run fine — until you decide to change your device’s orientation.
+
+![Problem](http://i.imgur.com/vEPKCuj.gif)
+
+**rcss.js** is a little library that generates responsive stylesheets at run-time, saving you a headache.
+
+```JavaScript
+var list_items = document.querySelectorAll('.list__item');
+var height = 0;
+var i;
+
+for(i = 0; i < list_items.length; i++) {
+	height = Math.max(list_items[i].clientHeight, height);
+}
+
+var style = new RCSS.Style();
+
+style.createQuery('(min-width: 60em)')
+	.add('.list__item', { height: height });
+```
+Problem solved!
+
+For more examples, look at the [examples folder](https://github.com/timseverien/rcss.js/tree/master/examples).
 
 # Usage
 

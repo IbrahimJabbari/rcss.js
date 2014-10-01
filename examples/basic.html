@@ -31,6 +31,21 @@
 <div class="container">
 	<h1>Resize the browser for magic!</h1>
 	<p>Magic powered by <a href="https://github.com/timseverien/rcss.js">rcss.js</a></p>
+	
+	<pre><code>var style = new RCSS.Style();
+style.inject();
+
+style.add('body', { 'background-color': '#913ca6' });
+
+style.createQuery('(min-width: 36em)')
+	.add('body', { 'background-color': '#a63c91' });
+
+style.createQuery('(min-width: 48em)')
+	.add('body', { 'background-color': '#a63c66' });
+
+style.createQuery('(min-width: 60em)')
+	.add('body', { 'background-color': '#a73d3d' });
+</code></pre>
 </div>
 
 <script src="../build/rcss.js"></script>

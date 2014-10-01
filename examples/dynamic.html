@@ -31,10 +31,36 @@
 <div class="container">
 	<h1>Resize the browser for magic!</h1>
 	<p>Magic powered by <a href="https://github.com/timseverien/rcss.js">rcss.js</a></p>
+	
+	<p>Objects are passed by reference, so you can alter the styles even after adding them!</p>
+	
+	<pre><code>var style = new RCSS.Style();
+style.inject();
+
+// Variable for dynamic styles
+var dynamic_style = {};
+
+style.add('body', dynamic_style);
+
+window.onresize = function() {
+	// Generate new hue
+	var h = Math.floor((window.innerWidth / 4) % 360);
+
+	// Set new style
+	dynamic_style['background-color'] = 'hsl(' + h + ', 40%, 40%)';
+	
+	// Update style
+	style.inject();
+};
+</code></pre>
 </div>
 
 <script src="../build/rcss.js"></script>
 <script>
+	// Used for requestAnimationFrame
+	var isFrameRequested = false;
+	
+	// Create new RCSS.Style and inject it
 	var style = new RCSS.Style();
 	style.inject();
 	
@@ -43,11 +69,25 @@
 	style.add('body', dynamic_style);
 	
 	var updateColor = function() {
-		// Generate hue
+		// Generate new hue
 		var h = Math.floor((window.innerWidth / 4) % 360);
 		
 		// Set new style
 		dynamic_style['background-color'] = 'hsl(' + h + ', 40%, 40%)';
+		
+		// We don’t need to inject on every resize, but on the first frame after a resize
+		// #perfmatters
+		
+		// If frame was already requested, don’t request another one
+		if(!isFrameRequested) {
+			isFrameRequested = true;
+			requestAnimationFrame(doInject);
+		}
+	};
+	
+	var doInject = function() {
+		// We’re ready for a next frame
+		isFrameRequested = false;
 		
 		// Update style
 		style.inject();
